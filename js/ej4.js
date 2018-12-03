@@ -23,10 +23,25 @@ var ricardo = {
 ricardo.consumir(manzana);
 
 //Planta curativa
-var PlantaCurativa = function(nombre,puntosVida){
+var PlantaCurativa = function(nombre,pVida){
     Consumible.apply(this,[nombre,"cura su vida."]);
-    this.puntosRegenerar = puntosVida;
-    this.consumir = function(){
+    this.puntosRegenerar = pVida;
+    this.consumir = function(personaje){
         
+        var vida = personaje.puntosVida;
+        var maxVida = personaje.maxPuntosVida;
+        var result = maxVida-vida;
+        if(result <= 0){
+            console.log("No puedes consumir esta planta porque tu vida esta completa.");
+        }else{
+            if((pVida + vida) >= 10){
+                personaje.puntosVida = maxVida;
+            }else{
+                personaje.puntosVida += pVida;
+            }
+            console.log(personaje.nombre + " consume " + this.nombre + " y " +this.efecto);
+        }
     }
 }
+ //Creamos una planta curativa
+var lechuga = new PlantaCurativa("Lechuga",1);
