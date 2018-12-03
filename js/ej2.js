@@ -26,18 +26,6 @@ zombi.atacar = function(objetivo) {
     console.log(this.nombre + " ataca a " + objetivo + " 4 veces y le causa "+ (this.potencia*4) + " puntos de daño");
 }
 
-zombi.mover = function(tipoTerreno) {  
-    if (tipoTerreno === "agua") {    
-        console.log(this.nombre + " nada a través del "+tipoTerreno);  
-    } else {    
-        console.log(this.nombre + " se mueve a través del " +tipoTerreno);  
-    }
-}
-
-zombi2.atacar = function(objetivo) {  
-    console.log(this.nombre + " ataca a " + objetivo + " 4 veces y le causa "+ (this.potencia*4) + " puntos de daño");
-}
-
 zombi2.mover = function(tipoTerreno) {  
     if (tipoTerreno === "agua") {    
         console.log(this.nombre + " nada a través del "+tipoTerreno);  
