@@ -22,11 +22,7 @@ var zombi = new Zombi('Bob', 2, 3);
 var zombi2 = new Zombi('Tod', 2, 3);
 
 //Le añadimos sus metodos
-<<<<<<< HEAD
 zombi.ataqueMultiple = function(objetivo) {
-=======
-zombi.atacar = function(objetivo) {
->>>>>>> master
     console.log(this.nombre + " ataca a " + objetivo + " 4 veces y le causa " + (this.potencia * 4) + " puntos de daño");
 }
 
@@ -39,7 +35,7 @@ zombi2.mover = function(tipoTerreno) {
 }
 
 //Probamos el funcionamiento.
-zombi.atacar('Javi');
+zombi.ataqueMultiple('Javi');
 zombi.mover('bosque');
 
 
