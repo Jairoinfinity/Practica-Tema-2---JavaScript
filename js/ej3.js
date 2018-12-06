@@ -14,6 +14,8 @@ var Jugador = function(nombre, apellido, ocupacion, nivel, faccion) {
 
 var jp = new Jugador("Jairo", "Bernal", "Programador", 24, "Roja");
 
-jp.toString();
-jp.incrementarNivel();
-jp.toString();
+console.log(jp);
+
+console.log(jp.toString());
+console.log(jp.incrementarNivel());
+console.log(jp.toString());
