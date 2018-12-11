@@ -25,49 +25,66 @@ ricardo.consumir(manzana);
 //Constructor Planta curativa
 var PlantaCurativa = function(nombre, pVida) {
         Consumible.apply(this, [nombre, "cura su vida."]);
-        this.consumir = function(personaje) {
+        this.pVida = pVida;
+}
 
-            var vida = personaje.puntosVida;
-            var maxVida = personaje.maxPuntosVida;
-            var result = maxVida - vida;
-            if (result <= 0) {
-                console.log("No puedes consumir esta planta porque tu vida esta completa.");
-            } else {
-                if ((pVida + vida) >= maxVida) {
-                    personaje.puntosVida = maxVida;
-                } else {
-                    personaje.puntosVida += pVida;
-                }
-                console.log(personaje.nombre + " consume " + this.nombre + " y " + this.efecto);
-            }
+
+PlantaCurativa.prototype = Object.create(Consumible.prototype);
+
+PlantaCurativa.prototype.consumir = function(personaje) {
+
+    var vida = personaje.puntosVida;
+    var maxVida = personaje.maxPuntosVida;
+    var result = maxVida - vida;
+    if (result <= 0) {
+        console.log("No puedes consumir esta planta porque tu vida esta completa.");
+    } else {
+        if ((this.pVida + vida) >= maxVida) {
+            personaje.puntosVida = maxVida;
+        } else {
+            personaje.puntosVida += this.pVida;
         }
+        console.log(personaje.nombre + " consume " + this.nombre + " y " + this.efecto);
     }
-    //Creamos una planta curativa
+}
+
+//Creamos una planta curativa
 var lechuga = new PlantaCurativa("Lechuga", 1);
 
+
 //Constructor Pastilla
-var Pastilla = function(nombre) {
+var Pastilla = function(nombre, pPotencia) {
     Consumible.apply(this, [nombre, "aumenta su potencia pero reduce su vida maxima."]);
-    this.consumir = function(personaje) {
+    this.pPotencia = pPotencia;
+}
 
+Pastilla.prototype = Object.create(Consumible.prototype);
 
+Pastilla.prototype.consumir = function(personaje) {
+    var vida = personaje.puntosVida;
+    var maxVida = personaje.maxPuntosVida;
 
-        var vida = personaje.puntosVida;
-        var maxVida = personaje.maxPuntosVida;
-
-        if (maxVida > 1) {
-            vida = ++personaje.potencia;
-            maxVida = --personaje.maxPuntosVida;
-
-            if (vida > maxVida) {
-                personaje.puntosVida = maxVida;
+    if (maxVida > 1) {
+        
+        var potencia = personaje.potencia + this.pPotencia;
+        if((maxVida - potencia) < 1){
+            personaje.potencia = 10;
+            personaje.maxPuntosVida = 1;
+            personaje.puntosVida = 1;
+        }else{
+            personaje.potencia = potencia;
+            personaje.maxPuntosVida -= this.pPotencia;
+            
+            if (personaje.puntosVida > personaje.maxPuntosVida) {
+                personaje.puntosVida = personaje.maxPuntosVida;
             }
-            console.log(personaje.nombre + " consume " + this.nombre + " y " + this.efecto);
-        } else {
-            console.log("No puedes consumir la pastilla porque ya estas a tope de potencia.");
         }
+
+        console.log(personaje.nombre + " consume " + this.nombre + " y " + this.efecto);
+    } else {
+        console.log("No puedes consumir la pastilla porque ya estas al minimo de vida y al máximo de potencia.");
     }
 }
 
 //Creamos una pastilla
-var pasti = new Pastilla("Paracetamol");
+var pasti = new Pastilla("Paracetamol",5);
